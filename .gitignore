@@ -1,0 +1,15 @@
+# Maven build output
+/target/
+
+# IntelliJ stuff
+/.idea/
+/out/
+
+# jpackage outputs
+/SorterGame/
+/*.exe
+/*.msi
+
+# OS noise
+.DS_Store
+Thumbs.db
