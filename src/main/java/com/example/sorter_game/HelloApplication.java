@@ -17,7 +17,7 @@ public class HelloApplication extends Application {
         );
 
 
-        stage.setTitle("Sorter Game");
+        stage.setTitle("Hungry Bunny");
         stage.setScene(menuScene);
         stage.show();
     }

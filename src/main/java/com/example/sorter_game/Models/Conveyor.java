@@ -25,7 +25,7 @@ public class Conveyor {
         Iterator<Box> it = boxes.iterator();
         while (it.hasNext()) {
             Box b = it.next();
-            if (b.getRow() >= CONVEYOR_HEIGHT) {
+            if (b.getRow()+1 >= CONVEYOR_HEIGHT) {
                 it.remove();
                 boolean accepted = (b.getLane() == openLane);
                 game.handleBoxAtBottom(b, accepted);
