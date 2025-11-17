@@ -62,7 +62,7 @@ public class HelloController {
             targetLabel.setText("Target: " + game.getTargetScore());
         }
 
-        loop = new Timeline(new KeyFrame(Duration.millis(200), e -> {
+        loop = new Timeline(new KeyFrame(Duration.millis(450), e -> {
             if (!game.isGameOver()) {
                 conveyor.tick(openLane, game);
                 draw();
