@@ -34,7 +34,7 @@ public class Conveyor {
     }
 
     private void maybeSpawnBox() {
-        if (tickCount % 3 == 0 || random.nextInt(20) < 2) {
+        if (tickCount % 3 == 0 || random.nextInt(40) < 2) {
             int lane = random.nextInt(LANE_COUNT);
             boxes.add(Box.randomBox(lane));
         }
