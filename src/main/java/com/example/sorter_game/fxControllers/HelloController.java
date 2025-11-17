@@ -38,7 +38,7 @@ public class HelloController {
 
     private Conveyor conveyor;
     private Game game;
-    private int openLane = 0; // 0 = Q, 1 = W, 2 = E
+    private int openLane = 0;
 
     private Timeline loop;
 
@@ -74,7 +74,6 @@ public class HelloController {
         loop.setCycleCount(Animation.INDEFINITE);
     }
 
-    // we'll call this from HelloApplication to attach key events
     public void initScene(Scene scene) {
         scene.setOnKeyPressed(event -> {
             KeyCode code = event.getCode();
@@ -84,7 +83,6 @@ public class HelloController {
             else if (code == KeyCode.X) scene.getWindow().hide();
         });
 
-        // start loop once scene is ready
         loop.play();
     }
 
@@ -93,12 +91,7 @@ public class HelloController {
         double width = gameCanvas.getWidth();
         double height = gameCanvas.getHeight();
 
-        //g.drawImage(bgImage,0, 0, width, height);
-        // draw background scaled to fit canvas
         g.drawImage(bgImage, 0, 0, width, height);
-
-        //g.setFill(Color.BLACK);
-        //g.fillRect(0, 0, width, height);
 
         int rows = Conveyor.CONVEYOR_HEIGHT;
         int lanes = Conveyor.LANE_COUNT;
@@ -142,7 +135,6 @@ public class HelloController {
             }
         }
 
-        // HUD
         scoreLabel.setText("Score: " + game.getScore());
         updateLifeDisplay();
     }

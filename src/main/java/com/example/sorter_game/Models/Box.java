@@ -10,9 +10,9 @@ public class Box {
 
     private static final Random random = new Random();
 
-    private ItemType itemType;
-    private int lane; // 0..2
-    private int row;  // 0 = top
+    private final ItemType itemType;
+    private final int lane;
+    private int row;
 
     public Box(ItemType itemType, int lane, int row) {
         this.itemType = itemType;
