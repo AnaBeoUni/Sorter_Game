@@ -2,50 +2,69 @@ package com.example.sorter_game.Models;
 
 import java.util.Random;
 
-public class Box {
+public class Box extends FallingObject {
 
     public enum ItemType {
-        NORMAL_CARROT, BOMB, RARE_CARROT
+        NORMAL_CARROT {
+            @Override
+            public void applyEffect(Game game) {
+                game.addScore(Game.NORMAL_CARROT_POINTS);
+            }
+        },
+        BOMB {
+            @Override
+            public void applyEffect(Game game) {
+                game.loseLife();
+            }
+        },
+        RARE_CARROT {
+            @Override
+            public void applyEffect(Game game) {
+                game.addScore(Game.RARE_CARROT_POINTS);
+            }
+        };
+
+        public abstract void applyEffect(Game game);
     }
 
-    private static final Random random = new Random();
+    private static final int RANDOM_ROLL_BOUND = 100;
+    private static final int NORMAL_CARROT_THRESHOLD = 45;
+    private static final int BOMB_THRESHOLD = 90;
+
+    private static final Random RANDOM = new Random();
 
     private final ItemType itemType;
-    private final int lane;
-    private int row;
 
-    public Box(ItemType itemType, int lane, int row) {
+    public Box(ItemType itemType, int laneIndex, int startRowIndex) {
+        super(laneIndex, startRowIndex);
         this.itemType = itemType;
-        this.lane = lane;
-        this.row = row;
     }
 
-    public static Box randomBox(int lane) {
-        int roll = random.nextInt(100);
-        ItemType itemType;
-        if (roll < 45) {
-            itemType = ItemType.NORMAL_CARROT;
-        } else if (roll < 90) {
-            itemType = ItemType.BOMB;
+    public static Box randomBox(int laneIndex) {
+        ItemType itemType = chooseRandomItemType();
+        return new Box(itemType, laneIndex, 0);
+    }
+
+    private static ItemType chooseRandomItemType() {
+        int roll = RANDOM.nextInt(RANDOM_ROLL_BOUND);
+        if (roll < NORMAL_CARROT_THRESHOLD) {
+            return ItemType.NORMAL_CARROT;
+        } else if (roll < BOMB_THRESHOLD) {
+            return ItemType.BOMB;
         } else {
-            itemType = ItemType.RARE_CARROT;
+            return ItemType.RARE_CARROT;
         }
-        return new Box(itemType, lane, 0);
     }
 
     public ItemType getItemType() {
         return itemType;
     }
 
-    public int getLane() {
-        return lane;
-    }
-
-    public int getRow() {
-        return row;
-    }
-
-    public void moveDown() {
-        row++;
+    @Override
+    public void onReachBottom(Game game, boolean accepted) {
+        if (!accepted) {
+            return;
+        }
+        itemType.applyEffect(game);
     }
 }

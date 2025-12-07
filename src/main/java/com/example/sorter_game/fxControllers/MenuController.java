@@ -1,5 +1,6 @@
 package com.example.sorter_game.fxControllers;
 
+import com.example.sorter_game.HelloApplication;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,16 +25,16 @@ public class MenuController {
         try {
             Stage stage = (Stage) startButton.getScene().getWindow();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/sorter_game/hello-view.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    HelloApplication.class.getResource("hello-view.fxml")
+            );
             Scene gameScene = new Scene(loader.load());
 
-            // Initialize game controller with the scene
             HelloController controller = loader.getController();
             controller.initScene(gameScene);
 
             stage.setScene(gameScene);
             stage.show();
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }

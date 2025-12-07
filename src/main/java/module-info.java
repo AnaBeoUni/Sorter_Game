@@ -8,6 +8,9 @@ module com.example.sorter_game {
 
     opens com.example.sorter_game to javafx.fxml;
     exports com.example.sorter_game;
+
     exports com.example.sorter_game.fxControllers;
     opens com.example.sorter_game.fxControllers to javafx.fxml;
+    
+    opens com.example.sorter_game.Models;
 }
